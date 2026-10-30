@@ -22,12 +22,16 @@
 
 ## Part B
 
-1.
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
+1. results table above
+2. Each iteration takes about 1.34 s, so 5 VUs give about 5 / 1.34 ≈ 3.7 req/s.
+3. No. p(95) from 474 ms (A2) to 392 ms (A3), even though the request rate rose from 1.33 to 2.12 req/s. 5 users is far inside QuickPizza's operational envelope, so the difference is network noise, not load. 
+4. p(95) rose from about 360 ms to about 420 ms during the spike, and returned to normal about 10–15 s after the load dropped back to 1 user.
+5. No. p(95) stayed around 350–420 ms from start to end, and failed requests stayed at 0%. A longer soak test could reveal a memory leak.
+6. The average hides slow requests. In A2 the average was 336 ms, but p(99) was 918 ms, so some users waited almost 3 times longer.
+7. Internet latency from Thailand to the server changes over time, while a lab network is short and stable, Other people use QuickPizza at the same time.
+8. It works like a denial-of-service attack: it can slow down or crash a system for its real users, and testing without permission may be illegal.
+9. Vague: The food delivery app should load fast." Testable: "With 200 users for 10 minutes, the restaurant list API answers 95% of requests within 800 ms and 99% within 1.5 s, and fewer than 0.5% of requests fail.
+   thresholds: {
+     http_req_duration: ['p(95)<800', 'p(99)<1500'],
+     http_req_failed: ['rate<0.005'],
+   }
