@@ -6,7 +6,7 @@
 - Step 0.2, requests, rate and p(95), and why the rate stays below 5: 75 requests, 3.71 req/s, p(95) = 318.82 ms. Each iteration takes about 1.34s, so 5 VUs give about 5 / 1.34 ≈ 3.7 req/s.
 - Step 0.3: iterations = 20, run ended after the 20th iteration
 - Step 0.6, exit code of the normal run and of the run with P95=300: 0 and 99
-- Step 0.7, rules that passed, p(95), p(99), exit code after your change:
+- Step 0.7: All 3 rules passed: 'p(95)<1000' p(95)=424.91ms, 'p(99)<1500' p(99)=450.01ms, 'rate<0.01' rate=0.00%. After changing the p(95) limit from 1000 ms to 100 ms (`-e P95=100`), the p(95) rule failed and the exit code was 99.
 - Step 0.8, what was wrong, and how the checks showed it:
 
 ## Part A results
