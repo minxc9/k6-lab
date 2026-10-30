@@ -8,6 +8,7 @@
 - Step 0.6, exit code of the normal run and of the run with P95=300: 0 and 99
 - Step 0.7: All 3 rules passed: 'p(95)<1000' p(95)=424.91ms, 'p(99)<1500' p(99)=450.01ms, 'rate<0.01' rate=0.00%. After changing the p(95) limit from 1000 ms to 100 ms (`-e P95=100`), the p(95) rule failed and the exit code was 99.
 - Step 0.8, what was wrong, and how the checks showed it:
+- Step 0.8: The request used lowercase names ('pepperoni', 'knife'), but the API uses 'Pepperoni' and 'Knife', so nothing was excluded. Before, "no pepperoni" failed 10/75 and "no knife needed" failed 25/75; after the fix, all 225 checks passed. Pizzas are random, so one manual request could look correct by luck, but 75 requests under load showed the failures clearly.
 
 ## Part A results
 
